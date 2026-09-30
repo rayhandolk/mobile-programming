@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pertemuan_4/toast_alert.dart';
 
 class TugasPage extends StatelessWidget {
   const TugasPage({super.key});
@@ -23,39 +24,63 @@ class TugasPage extends StatelessWidget {
       },
     ];
 
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: tugas.length,
-      itemBuilder: (context, index) {
-        final data = tugas[index];
+    return Column(
+      children: [
+        const SizedBox(height: 16),
 
-        final selesai = data['status'] == 'Selesai';
-
-        return Card(
-          elevation: 3,
-          margin: const EdgeInsets.only(bottom: 12),
-          child: ListTile(
-            leading: Icon(
-              selesai
-                  ? Icons.check_circle
-                  : Icons.assignment_outlined,
-              color: selesai ? Colors.green : Colors.orange,
-              size: 32,
-            ),
-
-            title: Text(
-              data['judul']!,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+        // Tombol untuk membuka halaman Toast
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PageToastAlert(),
               ),
-            ),
+            );
+          },
+          child: const Text('Test Toast'),
+        ),
 
-            subtitle: Text(
-              '${data['mataKuliah']} • ${data['status']}',
-            ),
+        const SizedBox(height: 8),
+
+        // Daftar tugas
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: tugas.length,
+            itemBuilder: (context, index) {
+              final data = tugas[index];
+
+              final selesai = data['status'] == 'Selesai';
+
+              return Card(
+                elevation: 3,
+                margin: const EdgeInsets.only(bottom: 12),
+                child: ListTile(
+                  leading: Icon(
+                    selesai
+                        ? Icons.check_circle
+                        : Icons.assignment_outlined,
+                    color: selesai ? Colors.green : Colors.orange,
+                    size: 32,
+                  ),
+
+                  title: Text(
+                    data['judul']!,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  subtitle: Text(
+                    '${data['mataKuliah']} • ${data['status']}',
+                  ),
+                ),
+              );
+            },
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 }

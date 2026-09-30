@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class BerandaPage extends StatelessWidget {
-  const BerandaPage({super.key});
+  final VoidCallback onLihatTugas;
+
+  const BerandaPage({
+    super.key,
+    required this.onLihatTugas,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,7 @@ class BerandaPage extends StatelessWidget {
           const SizedBox(height: 10),
 
           const Text(
-            'Selamat Datang di Aplikasi Mobile Programming',
+            'Selamat Datang',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -50,9 +55,9 @@ class BerandaPage extends StatelessWidget {
 
                   const SizedBox(width: 16),
 
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'Rayhan Aditya Saputra',
                         style: TextStyle(
@@ -60,7 +65,9 @@ class BerandaPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+
                       SizedBox(height: 4),
+
                       Text('Sistem Informasi'),
                     ],
                   ),
@@ -101,6 +108,17 @@ class BerandaPage extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+
+          const SizedBox(height: 24),
+
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: onLihatTugas,
+              icon: const Icon(Icons.assignment),
+              label: const Text('Lihat Tugas'),
+            ),
           ),
         ],
       ),

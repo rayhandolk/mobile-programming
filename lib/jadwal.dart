@@ -67,7 +67,6 @@ class JadwalPage extends StatelessWidget {
               size: 16,
             ),
 
-            // Ketika ListTile diklik
             onTap: () {
               Navigator.push(
                 context,
@@ -86,11 +85,6 @@ class JadwalPage extends StatelessWidget {
     );
   }
 }
-
-
-// ===============================
-// HALAMAN DETAIL JADWAL
-// ===============================
 
 class DetailJadwalPage extends StatelessWidget {
   final String hari;

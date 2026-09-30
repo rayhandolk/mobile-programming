@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'pertemuan_5/gesture_detector.dart';
+
 import 'beranda.dart';
 import 'jadwal.dart';
 import 'tugas.dart';
-import 'user.dart';
 import 'cari.dart';
 import 'profil.dart';
 
@@ -34,14 +35,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = const [
-    BerandaPage(),
-    JadwalPage(),
-    TugasPage(),
-    UserPage(),
-    CariPage(),
-    ProfilPage(),
-  ];
+  late final List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pages = [
+      BerandaPage(
+        onLihatTugas: () {
+          setState(() {
+            _selectedIndex = 2;
+          });
+        },
+      ),
+      const JadwalPage(),
+      const TugasPage(),
+      const CariPage(),
+      const ProfilPage(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +62,22 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Pertemuan 2'),
         backgroundColor: Colors.blue,
+
+        // Tombol untuk membuka Gesture Detector
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.touch_app),
+            tooltip: 'Gesture Detector',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const GestureDetectorPage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
 
       body: _pages[_selectedIndex],
@@ -69,22 +98,22 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.home),
             label: 'Beranda',
           ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
             label: 'Jadwal',
           ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment_outlined),
             label: 'Tugas',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'User',
-          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Cari',
           ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'Profil',
